@@ -117,7 +117,6 @@
             { id: '009', x: 615, y: 625, width: 50, height: 70 },
             { id: '010', x: 680, y: 630, width: 50, height: 70 },
             { id: '011', x: 735, y: 640, width: 45, height: 70 },
-
             { id: '012', x: 780, y: 625, width: 60, height: 80 },
             { id: '013', x: 850, y: 625, width: 55, height: 70 },
             { id: '014', x: 910, y: 600, width: 60, height: 80 },
@@ -128,7 +127,6 @@
             { id: '019', x: 1195, y: 615, width: 60, height: 80 },
             { id: '020', x: 1255, y: 605, width: 50, height: 65 },
             { id: '021', x: 1307, y: 590, width: 60, height: 90 },
-
             { id: '022', x: 1375, y: 590, width: 45, height: 70 },
             { id: '023', x: 1425, y: 600, width: 50, height: 80 },
             { id: '024', x: 1480, y: 600, width: 45, height: 70 },
@@ -167,7 +165,7 @@
             { id: '057', x: 1500, y: 400, width: 60, height: 80 },
             { id: '058', x: 1415, y: 490, width: 40, height: 60 },
             { id: '059', x: 1375, y: 450, width: 35, height: 50 },
-            { id:'060',x :1305,y :484,width :35,height :55},
+            { id: '060', x: 1305, y: 484, width: 35, height: 55},
             { id:'061',x :1265,y :440,width :35,height :60},
             { id:'062',x :1220,y :460,width :35,height :50},
             { id:'063',x :1185,y :460,width :35,height :50},
@@ -242,7 +240,13 @@
             box.addEventListener('click', () => openPopup(character.id));
             container.appendChild(box);
         });
-
+        const preloadImages = () => {
+            characters.forEach(character => {
+                const img = new Image();
+                img.src = `${character.id}.png`;
+            });
+        };
+        preloadImages();
         function openPopup(id) {
             document.getElementById('character-photo').src = id + '.png';
             document.getElementById('popup').style.display = 'flex';
