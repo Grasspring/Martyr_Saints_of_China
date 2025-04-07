@@ -20,12 +20,12 @@
         .background {
             position: relative;
             display: block;
-            width: 2000px; /* 2:1 比例，例如 2000x1000 */
+            width: 2000px; /* 2:1 */
             height: 1000px;
         }
         .bounding-box {
             position: absolute;
-            border: 2px solid red;
+            border: 2px solid #0000;
             cursor: pointer;
             z-index: 1;
         }
@@ -40,10 +40,23 @@
             justify-content: center;
             align-items: center;
             z-index: 2;
+            opacity: 0;
+        }
+        .popup-overlay.fade-in {
+            animation: fadeIn 0.5s forwards;
+        }
+        .popup-overlay.fade-out {
+            animation: fadeOut 0.5s forwards;
         }
         .popup {
             position: relative;
             background: none;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: popupFadeIn 0.5s forwards;
+        }
+        .popup.fade-out {
+            animation: popupFadeOut 0.5s forwards;
         }
         .popup img {
             max-width: 80vw;
@@ -61,6 +74,22 @@
             padding: 10px 15px;
             border-radius: 5px;
             z-index: 3;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes popupFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        @keyframes popupFadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.8); }
         }
     </style>
 </head>
@@ -198,7 +227,6 @@
             { id:'118',x :125,y :285,width :30,height :40},
             { id:'119',x :35,y :290,width :30,height :40},
             { id:'120',x :0,y :310,width :30,height :50},
-            // 可繼續添加直到 120
         ];
 
         const container = document.querySelector('.scroll-container');
@@ -217,10 +245,17 @@
         function openPopup(id) {
             document.getElementById('character-photo').src = id + '.png';
             document.getElementById('popup').style.display = 'flex';
+            const popup = document.getElementById('popup');
+            popup.classList.add('fade-in');
         }
 
         function closePopup() {
-            document.getElementById('popup').style.display = 'none';
+            const popup = document.getElementById('popup');
+            popup.classList.add('fade-out');
+            setTimeout(() => {
+                popup.style.display = 'none';
+                popup.classList.remove('fade-out');
+            }, 500); 
         }
     </script>
 </body>
