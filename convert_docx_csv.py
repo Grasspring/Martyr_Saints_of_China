@@ -31,7 +31,7 @@ def convert_docx_to_csv(docx_file, csv_file):
 
                 text_image = f"{id:03}.jpg"
                 # Append the character data as a tuple
-                characters.append((id, name, age, story,text_image))
+                characters.append((id, name, f"({age})", story,text_image))
                 count = 0
     # Write to CSV file
     with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
