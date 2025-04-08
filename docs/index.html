@@ -162,6 +162,13 @@
     
     
     <script>
+        
+        window.onload = function() {
+            if (!localStorage.getItem('tutorialShown')) {
+                document.getElementById('tutorialPopup').style.display = 'block';
+            }
+        };
+
         const characters = [
             { id: '001', x: 50, y: 610, width: 60, height: 80 },
             { id: '002', x: 135, y: 590, width: 60, height: 80 },
@@ -322,12 +329,6 @@
                 popup.classList.remove('fade-out');
             }, 500); 
         }
-
-        window.onload = function() {
-            if (!localStorage.getItem('tutorialShown')) {
-                document.getElementById('tutorialPopup').style.display = 'block';
-            }
-        };
 
         function closeTutorial() {
             if (document.getElementById('dontShowAgain').checked) {
