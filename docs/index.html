@@ -76,6 +76,46 @@
             border-radius: 5px;
             z-index: 3;
         }
+        .tutorial-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80vw;
+            max-width: 500px;
+            display: none;
+            z-index: 3;
+        }
+        .tutorial-popup p {
+            margin: 10px 0;
+            text-align: left;
+        }
+        .tutorial-popup button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .tutorial-popup label {
+            display: block;
+            margin-top: 10px;
+            ;
+        }
+        .tutorial-popup.fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+        button:active, button:focus {
+            box-shadow: none;
+            outline: 0;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -103,7 +143,24 @@
                 <img id="character-photo" src="" alt="saint_introduction">
             </div>
         </div>
+    
+        
     </div>
+    
+    <div class="tutorial-popup" id="tutorialPopup">
+        <h3>歡迎使用《中華殉道諸聖走廊》的線上互動頁面！</h3>
+        <p>使用說明:</p>
+        <p>1. 請點擊聖人的頭像以查看詳細資訊。</p>
+        <p>2. 打開聖人的詳細資訊後，可點擊空白位置或取消按鈕以隱藏資訊。</p>
+        <p>3. 使用滾輪或拖曳操作來移動畫面。</p>
+        <p>4. 如果是手機或平板使用者，建議使用橫向頁面來瀏覽此頁。</p>
+        <label>
+            <input type="checkbox" id="dontShowAgain"> 下次不再顯示
+        </label>
+        <button onclick="closeTutorial()">開始體驗</button>
+    </div>
+    
+    
     <script>
         const characters = [
             { id: '001', x: 50, y: 610, width: 60, height: 80 },
@@ -240,6 +297,8 @@
             box.addEventListener('click', () => openPopup(character.id));
             container.appendChild(box);
         });
+
+        // Preload images
         const preloadImages = () => {
             characters.forEach(character => {
                 const img = new Image();
@@ -247,6 +306,7 @@
             });
         };
         preloadImages();
+
         function openPopup(id) {
             document.getElementById('character-photo').src = id + '.png';
             document.getElementById('popup').style.display = 'flex';
@@ -262,6 +322,26 @@
                 popup.classList.remove('fade-out');
             }, 500); 
         }
+
+        window.onload = function() {
+            if (!localStorage.getItem('tutorialShown')) {
+                document.getElementById('tutorialPopup').style.display = 'block';
+            }
+        };
+
+        function closeTutorial() {
+            if (document.getElementById('dontShowAgain').checked) {
+                localStorage.setItem('tutorialShown', 'true');
+            }
+            const tutorialPopup = document.getElementById('tutorialPopup');
+            tutorialPopup.classList.add('fade-out');
+            setTimeout(() => {
+                tutorialPopup.style.display = 'none';
+                tutorialPopup.classList.remove('fade-out');
+            }, 500);
+        }
+
+  
     </script>
 </body>
 </html>
