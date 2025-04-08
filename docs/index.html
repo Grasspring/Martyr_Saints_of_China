@@ -114,10 +114,14 @@
         }
         button:active, button:focus {
             box-shadow: none;
-            outline: 0;
+            outline: none;
         }
-        :focus {
-            outline: none !important;
+        element {
+            -webkit-tap-highlight-color: transparent; /* remove tap highlight */
+        }
+        element:focus {
+            outline: none; /* remove outline */
+            box-shadow: none; /* remove box shadow */
         }
         @keyframes fadeIn {
             from { opacity: 0; }
