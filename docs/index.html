@@ -123,6 +123,20 @@
             outline: none; /* remove outline */
             box-shadow: none; /* remove box shadow */
         }
+
+        .loading-popup {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 4;
+            font-size: 18px;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -142,6 +156,8 @@
     </style>
 </head>
 <body>
+    <div class="loading-popup" id="loadingPopup">Loading...</div>
+
     <div class="scroll-container">
         <img src="large-background.jpg" alt="background_image" class="background">
         <div class="popup-overlay" id="popup" onclick="closePopup()">
@@ -169,7 +185,9 @@
     
     
     <script>
-        
+        window.onload = function() {
+            document.getElementById('loadingPopup').style.display = 'none';
+        };
         document.addEventListener("DOMContentLoaded", function() {
             if (!localStorage.getItem('tutorialShown')) {
                 document.getElementById('tutorialPopup').style.display = 'block';
