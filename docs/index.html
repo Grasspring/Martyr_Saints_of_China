@@ -328,13 +328,21 @@
             box.style.position = 'absolute';
             box.addEventListener('click', () => openPopup(character.id));
             container.appendChild(box);
+            totalImages++;
         });
+        function checkAllImagesLoaded() {
+            imagesLoaded++;
+            if (imagesLoaded >= totalImages) {
+                document.getElementById('loadingPopup').style.display = 'none';
+            }
+        }
 
         // Preload images
         const preloadImages = () => {
             characters.forEach(character => {
                 const img = new Image();
                 img.src = `${character.id}.png`;
+                img.onload = checkAllImagesLoaded;
             });
         };
         preloadImages();
