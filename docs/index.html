@@ -314,6 +314,8 @@
             { id:'120',x :0,y :310,width :30,height :50},
         ];
 
+        let totalImages = 0;
+        let imagesLoaded = 0;
         const container = document.querySelector('.scroll-container');
         characters.forEach(character => {
             let box = document.createElement('div');
