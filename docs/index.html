@@ -159,7 +159,7 @@
 
 
     <div class="scroll-container">
-        <img src="large-background.jpg" alt="background_image" class="background">
+        <img id="backgroundimage" src="large-background.jpg" alt="background_image" class="background">
         <div class="popup-overlay" id="popup" onclick="closePopup()">
             <span class="close-btn" onclick="closePopup()">✖</span>
             <div class="popup" onclick="event.stopPropagation();">
@@ -329,6 +329,22 @@
             container.appendChild(box);
             totalImages++;
         });
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        const displayMode = getQueryParam("display");
+        if (displayMode === "1") {
+            document.getElementById("backgroundimage").style.width = "1000px";
+            document.getElementById("backgroundimage").style.height = "500px";
+            document.querySelectorAll(".bounding-box").forEach(box => {
+                box.style.left = `${parseInt(box.style.left) / 2}px`;
+                box.style.top = `${parseInt(box.style.top) / 2}px`;
+                box.style.width = `${parseInt(box.style.width) / 2}px`;
+                box.style.height = `${parseInt(box.style.height) / 2}px`;
+            });
+        }
         function checkAllImagesLoaded() {
             imagesLoaded++;
             if (imagesLoaded >= totalImages) {
