@@ -336,13 +336,13 @@
         
         const displayMode = getQueryParam("display");
         if (displayMode === "1") {
-            document.getElementById("backgroundimage").style.width = "1000px";
-            document.getElementById("backgroundimage").style.height = "500px";
+            document.getElementById("backgroundimage").style.width = "500px";
+            document.getElementById("backgroundimage").style.height = "250px";
             document.querySelectorAll(".bounding-box").forEach(box => {
-                box.style.left = `${parseInt(box.style.left) / 2}px`;
-                box.style.top = `${parseInt(box.style.top) / 2}px`;
-                box.style.width = `${parseInt(box.style.width) / 2}px`;
-                box.style.height = `${parseInt(box.style.height) / 2}px`;
+                box.style.left = `${parseInt(box.style.left) / 4}px`;
+                box.style.top = `${parseInt(box.style.top) / 4}px`;
+                box.style.width = `${parseInt(box.style.width) / 4}px`;
+                box.style.height = `${parseInt(box.style.height) / 4}px`;
             });
         }
         function checkAllImagesLoaded() {
